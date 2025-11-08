@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Sampler Web</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Audio Sampler Web</h1>
+        </header>
+
+        <main>
+            <!-- Section de sélection de preset -->
+            <section class="preset-section">
+                <label for="preset-select">Preset :</label>
+                <select id="preset-select">
+                    <option value="">Sélectionner un preset...</option>
+                </select>
+                <button id="load-all-btn" class="btn btn-primary">Load All</button>
+                <button id="upload-audio-btn" class="btn btn-upload">📁 Upload Audio</button>
+            </section>
+
+            <!-- Section de visualisation -->
+            <section class="visualization-section">
+                <div class="waveform-container">
+                    <canvas id="waveform-canvas"></canvas>
+                    <canvas id="trimbars-canvas"></canvas>
+                </div>
+                <div class="controls">
+                    <button id="play-btn" class="btn btn-success">Play</button>
+                    <button id="save-btn" class="btn btn-secondary">Save</button>
+                </div>
+            </section>
+
+            <!-- Section d'enregistrement -->
+            <section class="recording-section">
+                <h3>🎙️ Enregistrement de Session</h3>
+                <div class="recording-controls">
+                    <button id="record-start-btn" class="btn btn-record">⏺ Démarrer l'enregistrement</button>
+                    <button id="record-stop-btn" class="btn btn-stop" disabled>⏹ Arrêter et sauvegarder</button>
+                    <span id="record-timer" class="record-timer">00:00</span>
+                </div>
+                <p class="recording-info">
+                    💡 Démarrez l'enregistrement, jouez vos samples, puis arrêtez pour télécharger votre composition !
+                </p>
+            </section>
+
+            <!-- Grille de pads 4x4 -->
+            <section class="pads-section">
+                <div id="pads-grid" class="pads-grid">
+                    <!-- Les pads seront générés dynamiquement -->
+                </div>
+            </section>
+
+            <!-- Section de statut -->
+            <section class="status-section">
+                <div id="status-message"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Module ES6 -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
+
