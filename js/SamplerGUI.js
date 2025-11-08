@@ -8,6 +8,7 @@ import { TrimbarsDrawer } from './TrimbarsDrawer.js';
 import { DownloadManager } from './DownloadManager.js';
 import { KeyboardHandler } from './KeyboardHandler.js';
 import { AudioUploader } from './AudioUploader.js';
+import { NotificationManager } from './NotificationManager.js';
 import { fetchPresets, buildPresetURLs } from './api.js';
 import { getFilenameFromURL } from './utils.js';
 import { blobToArrayBuffer } from './soundutils.js';
@@ -19,6 +20,7 @@ export class SamplerGUI {
         this.keyboardHandler = null;
         this.audioUploader = null;
         this.fileInput = null;
+        this.notificationManager = new NotificationManager();
         
         // Références aux éléments DOM
         this.elements = {
@@ -448,6 +450,7 @@ export class SamplerGUI {
             }
 
             this.displayStatus('Tous les samples sont chargés !', 'success');
+            this.notificationManager.success(`✅ ${samplesData.length} samples chargés avec succès !`, 3000);
             this.updateButtonStates();
 
         } catch (error) {
@@ -769,6 +772,7 @@ export class SamplerGUI {
             this.startRecordingTimer();
             
             this.displayStatus('🔴 Enregistrement en cours... Jouez vos samples !', 'info');
+            this.notificationManager.info('🔴 Enregistrement démarré ! Jouez vos samples...', 4000);
             
         } catch (error) {
             console.error('❌ Erreur lors du démarrage de l\'enregistrement:', error);
@@ -848,13 +852,34 @@ export class SamplerGUI {
     /**
      * Affiche un message de statut
      * @param {string} message - Message à afficher
-     * @param {string} type - Type: 'info', 'success', 'error'
+     * @param {string} type - Type: 'info', 'success', 'error', 'warning'
      */
     displayStatus(message, type = 'info') {
+        // Afficher dans la barre de statut (en bas)
         if (this.elements.statusMessage) {
             this.elements.statusMessage.textContent = message;
             this.elements.statusMessage.className = type;
         }
+        
+        // Messages à ne PAS afficher en notification (trop fréquents ou peu importants)
+        const skipNotification = 
+            message.toLowerCase().startsWith('lecture') ||
+            message.includes('Sampler prêt') ||
+            message.includes('preset chargés') ||
+            message.includes('Chargement des presets') ||
+            message.includes('Décodage des samples');
+        
+        // Afficher une notification toast (en haut à droite) pour les messages importants seulement
+        if (!skipNotification) {
+            if (type === 'error') {
+                this.notificationManager.error(message, 6000);
+            } else if (type === 'success') {
+                this.notificationManager.success(message, 4000);
+            } else if (type === 'warning') {
+                this.notificationManager.warning(message, 5000);
+            }
+        }
+        
         console.log(`[${type.toUpperCase()}] ${message}`);
     }
 }
