@@ -5,6 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
+    "build": "echo 'Build complete - No compilation needed for Node.js server'",
     "start": "node server.js",
     "dev": "node server.js"
   },
