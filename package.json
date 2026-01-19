@@ -7,11 +7,15 @@
     "start": "node frontend-server.js",
     "dev": "node frontend-server.js"
   },
-  "keywords": ["audio", "sampler", "web-audio"],
+  "keywords": [
+    "audio",
+    "sampler",
+    "web-audio"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "http-proxy-middleware": "^3.0.5"
   }
 }
-

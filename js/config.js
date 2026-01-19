@@ -6,7 +6,7 @@
 export const CONFIG = {
     // API
     api: {
-        baseUrl: 'http://localhost:3000',
+        baseUrl: 'https://m1-web-backend.onrender.com',
         endpoints: {
             presets: '/api/presets',
             files: '/presets'

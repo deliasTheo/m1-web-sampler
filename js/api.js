@@ -7,7 +7,7 @@ import { buildAudioURL } from './utils.js';
 /**
  * URL de base de l'API
  */
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'https://m1-web-backend.onrender.com';
 
 /**
  * Récupère la liste des presets depuis l'API REST
