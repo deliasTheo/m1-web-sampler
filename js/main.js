@@ -6,6 +6,8 @@
 import { SamplerEngine } from './SamplerEngine.js';
 import { SamplerGUI } from './SamplerGUI.js';
 import { isWebAudioSupported } from './soundutils.js';
+import { testHeadless } from './test-headless.js';
+
 
 // Variables globales
 let samplerEngine;
@@ -42,7 +44,6 @@ async function init() {
         console.log('===================================');
         console.log('Audio Sampler prêt à l\'emploi !');
         console.log('===================================');
-        
     } catch (error) {
         console.error('❌ Erreur lors de l\'initialisation:', error);
         displayStatus('Erreur lors de l\'initialisation : ' + error.message, 'error');
