@@ -20,6 +20,7 @@ export class KeyboardHandler {
 
     /**
      * Obtient le mapping par défaut des touches
+     * Utilise event.code pour la position physique de la touche (compatible Mac/Windows)
      */
     getDefaultKeyMap() {
         return {
@@ -27,11 +28,21 @@ export class KeyboardHandler {
             'Space': 'play',
             'Escape': 'stop',
             
-            // Pads (layout QWERTY)
-            '1': 12, '2': 13, '3': 14, '4': 15,  // Ligne du haut
-            'Q': 8,  'W': 9,  'E': 10, 'R': 11,  // Deuxième ligne
-            'A': 4,  'S': 5,  'D': 6,  'F': 7,   // Troisième ligne
-            'Z': 0,  'X': 1,  'C': 2,  'V': 3    // Ligne du bas
+            // Pads (layout AZERTY)
+            // Ligne du haut (pads 0-3) : touches 1, 2, 3, 4
+            // Sur Mac AZERTY, ces touches produisent &, é, ", ' sans Shift, mais event.code reste Digit1-4
+            'Digit1': 0, 'Digit2': 1, 'Digit3': 2, 'Digit4': 3,
+            // Support supplémentaire pour Mac AZERTY (caractères produits sans Shift)
+            '&': 0, 'é': 1, '"': 2, "'": 3,
+            
+            // Deuxième ligne (pads 4-7) : a, z, e, r
+            'a': 4, 'z': 5, 'e': 6, 'r': 7,
+            
+            // Troisième ligne (pads 8-11) : q, s, d, f
+            'q': 8, 's': 9, 'd': 10, 'f': 11,
+            
+            // Ligne du bas (pads 12-15) : w, x, c, v
+            'w': 12, 'x': 13, 'c': 14, 'v': 15
         };
     }
 
@@ -48,8 +59,16 @@ export class KeyboardHandler {
             return;
         }
 
-        const key = event.code.replace('Key', ''); // 'KeyA' -> 'A'
-        const mapping = this.keyMap[key];
+        // Utiliser event.code pour la position physique (compatible Mac/Windows)
+        // et event.key pour les caractères spéciaux sur Mac AZERTY
+        const keyCode = event.code;
+        const keyChar = event.key;
+        
+        // Chercher d'abord par code (position physique), puis par caractère
+        let mapping = this.keyMap[keyCode];
+        if (mapping === undefined) {
+            mapping = this.keyMap[keyChar];
+        }
 
         if (mapping === undefined) return;
 
