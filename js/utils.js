@@ -93,7 +93,7 @@ export function buildAudioURL(relativeUrl, baseUrl = 'http://localhost:3000/pres
     // Enlever le "./" du début si présent
     const cleanPath = relativeUrl.replace(/^\.\//, '');
     // Construire l'URL complète
-    const fullUrl = `${baseUrl}/${cleanPath}`;
+    const fullUrl = `${baseUrl}${cleanPath}`;
     // Encoder les espaces et caractères spéciaux
     return encodeURL(fullUrl);
 }

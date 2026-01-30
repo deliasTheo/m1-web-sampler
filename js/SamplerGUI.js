@@ -310,6 +310,7 @@ export class SamplerGUI {
 
         // Définir le nouveau preset
         this.currentPreset = buildPresetURLs(preset);
+        
         console.log('✅ [handlePresetSelection] currentPreset défini:', this.currentPreset);
 
         // Mettre à jour l'affichage
@@ -365,7 +366,8 @@ export class SamplerGUI {
 
             // Télécharger tous les fichiers avec progression
             const urls = samples.map(s => s.fullUrl);
-            
+
+            console.log('urls', urls);
             await this.downloadManager.downloadMultiple(
                 urls,
                 (overallProgress) => {

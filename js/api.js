@@ -7,7 +7,7 @@ import { buildAudioURL } from './utils.js';
 /**
  * URL de base de l'API
  */
-const API_BASE_URL = 'https://m1-web-backend.onrender.com';
+const API_BASE_URL = 'https://m1-web-backend-n06t.onrender.com';
 
 /**
  * Récupère la liste des presets depuis l'API REST
@@ -44,11 +44,11 @@ export function buildPresetURLs(preset) {
     
     // Cloner le preset pour ne pas modifier l'original
     const presetWithURLs = { ...preset };
-    
+
     // Construire les URLs complètes pour chaque sample
     presetWithURLs.samples = preset.samples.map(sample => ({
         ...sample,
-        fullUrl: buildAudioURL(sample.url, `${API_BASE_URL}/presets`)
+        fullUrl: buildAudioURL(sample.url, `${API_BASE_URL}`)
     }));
     
     return presetWithURLs;

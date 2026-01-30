@@ -29,7 +29,7 @@ export async function testHeadless() {
 
         // 2. Charger un sample (remplacer par une vraie URL)
         console.log('\n2. Chargement d\'un sample...');
-        const testUrl = 'https://m1-web-backend.onrender.com/presets/808/Kick%20808X.wav';
+        const testUrl = 'https://m1-web-backend-n06t.onrender.com/presets/808/Kick%20808X.wav';
         
         try {
             const index = await engine.loadSample(testUrl, 'Test Kick');
@@ -76,8 +76,8 @@ export async function testHeadless() {
         // 7. Test de chargement multiple
         console.log('\n7. Test de chargement multiple...');
         const samples = [
-            { url: 'https://m1-web-backend.onrender.com/presets/808/Kick 808X.wav', name: 'kick' },
-            { url: 'https://m1-web-backend.onrender.com/presets/808/Snare 808 1.wav', name: 'snare1' }
+            { url: 'https://m1-web-backend-n06t.onrender.com/presets/808/Kick 808X.wav', name: 'kick' },
+            { url: 'https://m1-web-backend-n06t.onrender.com/presets/808/Snare 808 1.wav', name: 'snare1' }
         ];
 
         try {
